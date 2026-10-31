@@ -253,6 +253,16 @@ document.getElementById("approval").textContent="Durum: Taslak kontrol edildi ve
 </script>
 
   <script>
+  <script>
+window.addEventListener("load", function () {
+  const eskiButonlar = document.querySelectorAll("button");
+  eskiButonlar.forEach(function (buton) {
+    if (buton.innerText.toLowerCase().includes("hazırla")) {
+      buton.onclick = bilgixAI;
+    }
+  });
+});
+</script>
 
 async function bilgixAI() {
 
