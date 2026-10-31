@@ -8,31 +8,41 @@
 
 <meta charset="UTF-8">
 
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 
-<title>BİLGİX Otomasyon</title>
+<title>BİLGİX Video Merkezi</title>
 
 <style>
 
 *{box-sizing:border-box}
 
-body{margin:0;background:#10131c;color:#fff;font-family:Arial,sans-serif;padding:20px}
+body{margin:0;background:#0d1220;color:#fff;font-family:Arial;padding:18px}
 
-main{max-width:600px;margin:auto}
+main{max-width:650px;margin:auto}
 
-h1{color:#55d6be;font-size:32px}
+h1{color:#52e0c0;font-size:34px;margin-bottom:5px}
 
-.card{background:#202635;padding:18px;border-radius:15px;margin:16px 0}
+.sub{color:#aab4c8}
 
-button{background:#55d6be;color:#10131c;border:0;padding:15px;border-radius:9px;font-weight:bold;width:100%;margin-top:12px}
+.card{background:#1a2335;padding:17px;border-radius:15px;margin:17px 0}
 
-textarea,input{width:100%;background:#10131c;color:white;border:1px solid #555;padding:12px;border-radius:8px;margin-top:8px}
+label{display:block;margin:12px 0 7px;color:#c8d4e8}
 
-textarea{height:180px}
+input,select,textarea{width:100%;padding:13px;border-radius:9px;border:1px solid #46536a;background:#101827;color:white;font-size:15px}
 
-small{color:#aab3c5}
+textarea{min-height:130px;line-height:1.5}
 
-.status{color:#55d6be}
+button{width:100%;padding:14px;border:0;border-radius:9px;background:#52e0c0;color:#07131a;font-size:16px;font-weight:bold;margin-top:12px}
+
+.secondary{background:#34445c;color:white}
+
+.scene{border-bottom:1px solid #39465a;padding:12px 0;line-height:1.5}
+
+.scene:last-child{border:0}
+
+.small{font-size:12px;color:#aab4c8}
+
+#output{white-space:pre-wrap;line-height:1.6}
 
 </style>
 
@@ -42,95 +52,201 @@ small{color:#aab3c5}
 
 <main>
 
-<h1>BİLGİX</h1>
+<h1>BİLGİX 🌍</h1>
 
-<p>Otonom YouTube Shorts Merkezi</p>
-
-<small>Günlük hedef: 1 video | Yayın öncesi onay</small>
+<div class="sub">Otonom Seyahat ve YouTube Shorts Merkezi</div>
 
 <div class="card">
 
-<h3>🎬 Video üretim merkezi</h3>
+<h3>🎬 Yeni video oluştur</h3>
 
-<label>Video konusu</label>
+<label>Ülke veya konu</label>
 
-<input id="topic" placeholder="Örn: Japonya'da yaşam">
+<input id="country" placeholder="Örnek: Japonya, Bali, Arjantin">
 
-<button onclick="createDraft()">Taslak hazırla</button>
+<label>Video süresi</label>
 
-<p id="status" class="status">Sistem hazır.</p>
+<select id="duration">
+
+<option value="60">60 saniye</option>
+
+<option value="90">90 saniye</option>
+
+</select>
+
+<label>İçerik türü</label>
+
+<select id="type">
+
+<option>Ülke tanıtımı ve gezi rehberi</option>
+
+<option>Vize ve seyahat şartları</option>
+
+<option>Seyahat maliyetleri</option>
+
+<option>Gezilecek en güzel yerler</option>
+
+</select>
+
+<button onclick="generate()">Video taslağını oluştur</button>
+
+<p id="status" class="small">Sistem hazır. Günlük hedef: 1 video.</p>
 
 </div>
 
 <div class="card">
 
-<h3>📝 Video metni</h3>
+<h3>📝 Video senaryosu</h3>
 
-<textarea id="script" placeholder="Video metni burada görünecek..."></textarea>
+<div id="output">Henüz video oluşturulmadı.</div>
 
-<button onclick="copyText()">Metni kopyala</button>
+<button onclick="copyOutput()">Senaryoyu kopyala</button>
 
 </div>
 
 <div class="card">
 
-<h3>📋 Yayın kontrolü</h3>
+<h3>🎥 Sahne planı</h3>
 
-<p>Günlük Shorts: 1</p>
+<div id="scenes" class="small">Video oluşturulduğunda sahneler burada görünecek.</div>
 
-<p>Yayın modu: Önce onay</p>
+</div>
 
-<p id="approval">Durum: Onay bekleniyor</p>
+<div class="card">
+
+<h3>📢 YouTube yayın paketi</h3>
+
+<label>Video başlığı</label>
+
+<input id="title" placeholder="Video başlığı">
+
+<label>Video açıklaması</label>
+
+<textarea id="description" placeholder="Video açıklaması"></textarea>
+
+<label>Etiketler</label>
+
+<textarea id="tags" placeholder="Video etiketleri"></textarea>
+
+<button class="secondary" onclick="copyPackage()">Yayın paketini kopyala</button>
+
+</div>
+
+<div class="card">
+
+<h3>✅ Yayın kontrolü</h3>
+
+<p>Günlük üretim hedefi: 1 Shorts</p>
+
+<p>Yayın modu: Önce kontrol ve onay</p>
+
+<p id="approval">Durum: Taslak bekleniyor</p>
 
 <button onclick="approve()">Taslağı onayla</button>
 
+<p class="small">Bu onay yalnızca taslak durumunu değiştirir. YouTube'a yükleme yapmaz.</p>
+
 </div>
 
-<p><small>İlk sürüm: kontrol paneli prototipi. Gerçek yapay zekâ üretimi ve YouTube bağlantısı henüz eklenmedi.</small></p>
+<div class="card">
+
+<h3>⚠️ Bilgi doğrulama</h3>
+
+<p class="small">Vize, bilet, otel ve güncel fiyat bilgileri gerçek kaynaklardan kontrol edilmelidir. Bu sürüm internetten araştırma yapmaz ve fiyat uydurmaz.</p>
+
+</div>
 
 </main>
 
 <script>
 
-function createDraft(){
+let currentScript="";
 
-const topic=document.getElementById("topic").value.trim();
+function generate(){
 
-if(!topic){alert("Önce video konusunu yaz.");return;}
+const country=document.getElementById("country").value.trim();
 
-document.getElementById("script").value=
+const duration=Number(document.getElementById("duration").value);
 
-"BUGÜNÜN BİLGİX VİDEOSU: "+topic+
+const type=document.getElementById("type").value;
 
-"\n\nBu konu için özgün video metni hazırlanacak.\n\nGiriş:\nBugün size "+topic+" hakkında şaşırtıcı bilgiler anlatıyoruz.\n\nGelişme:\nBu bölümde doğrulanmış bilgiler, önemli detaylar ve izleyiciye faydalı bilgiler yer alacak.\n\nKapanış:\nDaha fazlası için BİLGİX kanalını takip etmeyi unutmayın!";
+if(!country){alert("Önce bir ülke veya konu yaz.");return;}
 
-document.getElementById("status").textContent="Örnek taslak oluşturuldu.";
+const scenes=[
+
+["0-5 sn","Güçlü açılış","Ülkenin en dikkat çekici manzarası"],
+
+["5-12 sn","Ülkeyi tanıyalım",country+" haritası ve şehir görüntüleri"],
+
+["12-20 sn","Vize bilgisi","Pasaport ve vize animasyonu"],
+
+["20-28 sn","Ulaşım maliyeti","Uçak ve bilet animasyonu"],
+
+["28-36 sn","Gezilecek yerler","Ünlü turistik noktalar"],
+
+["36-44 sn","Yeme içme ve konaklama","Yerel yemekler ve oteller"],
+
+["44-52 sn","En iyi ziyaret zamanı","Mevsim ve hava görüntüleri"],
+
+["52-60 sn","Kapanış","Takip ve yorum çağrısı"]
+
+];
+
+let intro=country+" seyahati düşündüğünden çok daha ilginç olabilir! Peki buraya gitmek için ne gerekiyor?";
+
+let body=country+" hakkında bilmen gerekenleri senin için derledik. Öncelikle vize ve pasaport şartlarını seyahatten önce resmî kaynaklardan kontrol et. Uçak bileti fiyatları seyahat tarihine ve aktarmalara göre değişiyor. Bu yüzden biletini almadan önce farklı tarihleri karşılaştır. Gezilecek yerler arasında ülkenin simge şehirlerini, doğal güzelliklerini ve yerel kültürünü keşfetmeyi unutma. Konaklama ve günlük harcamalar için de seyahat bütçeni önceden planla. Genellikle seyahat mevsimi seçimi hem fiyatları hem de gezi deneyimini etkiler. Gitmeden önce hava durumunu ve güncel seyahat koşullarını kontrol et.";
+
+let ending="Sen "+country+"'ye gitmek ister miydin? Yorumlara yaz. Daha fazla gezi rehberi için BİLGİX'i takip et!";
+
+currentScript=intro+"\n\n"+body+"\n\n"+ending;
+
+if(duration===90){
+
+currentScript+="\n\nEk bölüm: Seyahat planını yaparken ulaşım seçeneklerini, şehirler arası mesafeleri ve yerel kültürü de araştır. Böylece tatilinden çok daha fazla verim alabilirsin.";
 
 }
 
-function copyText(){
+document.getElementById("output").textContent=currentScript;
 
-const t=document.getElementById("script");
+document.getElementById("status").textContent="Taslak oluşturuldu. Kaynak kontrolü gerekiyor.";
 
-if(!t.value){alert("Önce taslak hazırla.");return;}
+document.getElementById("approval").textContent="Durum: Onay bekleniyor";
 
-t.select();
+document.getElementById("scenes").innerHTML=scenes.map(s=>
 
-document.execCommand("copy");
+'<div class="scene"><b>'+s[0]+' · '+s[1]+'</b><br>'+s[2]+'</div>'
 
-alert("Metin kopyalandı.");
+).join("");
+
+document.getElementById("title").value=country+" Seyahat Rehberi: Gitmeden Önce Bunları Bil!";
+
+document.getElementById("description").value=country+" hakkında vize, uçak bileti, gezilecek yerler ve seyahat planı. Güncel bilgileri seyahat öncesinde resmî kaynaklardan kontrol etmeyi unutma.\n\nBİLGİX ile dünyayı keşfet!";
+
+document.getElementById("tags").value="#BILGIX #gezi #seyahat #vize #tatil #"+country.replace(/\s/g,"");
+
+}
+
+function copyOutput(){
+
+if(!currentScript){alert("Önce video oluştur.");return;}
+
+navigator.clipboard.writeText(currentScript).then(()=>alert("Senaryo kopyalandı.")).catch(()=>alert("Metni seçip kopyalayabilirsin."));
+
+}
+
+function copyPackage(){
+
+let text="BAŞLIK:\n"+document.getElementById("title").value+"\n\nAÇIKLAMA:\n"+document.getElementById("description").value+"\n\nETİKETLER:\n"+document.getElementById("tags").value;
+
+navigator.clipboard.writeText(text).then(()=>alert("Yayın paketi kopyalandı.")).catch(()=>alert("Metinleri seçip kopyalayabilirsin."));
 
 }
 
 function approve(){
 
-if(!document.getElementById("script").value.trim()){
+if(!currentScript){alert("Önce taslak oluştur.");return;}
 
-alert("Önce taslak oluştur.");return;
-
-}
-
-document.getElementById("approval").textContent="Durum: Demo onayı verildi.";
+document.getElementById("approval").textContent="Durum: Taslak kontrol edildi ve yerel olarak onaylandı.";
 
 }
 
