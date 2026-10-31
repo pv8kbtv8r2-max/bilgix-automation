@@ -1,0 +1,141 @@
+
+
+<!DOCTYPE html>
+
+<html lang="tr">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>BİLGİX Otomasyon</title>
+
+<style>
+
+*{box-sizing:border-box}
+
+body{margin:0;background:#10131c;color:#fff;font-family:Arial,sans-serif;padding:20px}
+
+main{max-width:600px;margin:auto}
+
+h1{color:#55d6be;font-size:32px}
+
+.card{background:#202635;padding:18px;border-radius:15px;margin:16px 0}
+
+button{background:#55d6be;color:#10131c;border:0;padding:15px;border-radius:9px;font-weight:bold;width:100%;margin-top:12px}
+
+textarea,input{width:100%;background:#10131c;color:white;border:1px solid #555;padding:12px;border-radius:8px;margin-top:8px}
+
+textarea{height:180px}
+
+small{color:#aab3c5}
+
+.status{color:#55d6be}
+
+</style>
+
+</head>
+
+<body>
+
+<main>
+
+<h1>BİLGİX</h1>
+
+<p>Otonom YouTube Shorts Merkezi</p>
+
+<small>Günlük hedef: 1 video | Yayın öncesi onay</small>
+
+<div class="card">
+
+<h3>🎬 Video üretim merkezi</h3>
+
+<label>Video konusu</label>
+
+<input id="topic" placeholder="Örn: Japonya'da yaşam">
+
+<button onclick="createDraft()">Taslak hazırla</button>
+
+<p id="status" class="status">Sistem hazır.</p>
+
+</div>
+
+<div class="card">
+
+<h3>📝 Video metni</h3>
+
+<textarea id="script" placeholder="Video metni burada görünecek..."></textarea>
+
+<button onclick="copyText()">Metni kopyala</button>
+
+</div>
+
+<div class="card">
+
+<h3>📋 Yayın kontrolü</h3>
+
+<p>Günlük Shorts: 1</p>
+
+<p>Yayın modu: Önce onay</p>
+
+<p id="approval">Durum: Onay bekleniyor</p>
+
+<button onclick="approve()">Taslağı onayla</button>
+
+</div>
+
+<p><small>İlk sürüm: kontrol paneli prototipi. Gerçek yapay zekâ üretimi ve YouTube bağlantısı henüz eklenmedi.</small></p>
+
+</main>
+
+<script>
+
+function createDraft(){
+
+const topic=document.getElementById("topic").value.trim();
+
+if(!topic){alert("Önce video konusunu yaz.");return;}
+
+document.getElementById("script").value=
+
+"BUGÜNÜN BİLGİX VİDEOSU: "+topic+
+
+"\n\nBu konu için özgün video metni hazırlanacak.\n\nGiriş:\nBugün size "+topic+" hakkında şaşırtıcı bilgiler anlatıyoruz.\n\nGelişme:\nBu bölümde doğrulanmış bilgiler, önemli detaylar ve izleyiciye faydalı bilgiler yer alacak.\n\nKapanış:\nDaha fazlası için BİLGİX kanalını takip etmeyi unutmayın!";
+
+document.getElementById("status").textContent="Örnek taslak oluşturuldu.";
+
+}
+
+function copyText(){
+
+const t=document.getElementById("script");
+
+if(!t.value){alert("Önce taslak hazırla.");return;}
+
+t.select();
+
+document.execCommand("copy");
+
+alert("Metin kopyalandı.");
+
+}
+
+function approve(){
+
+if(!document.getElementById("script").value.trim()){
+
+alert("Önce taslak oluştur.");return;
+
+}
+
+document.getElementById("approval").textContent="Durum: Demo onayı verildi.";
+
+}
+
+</script>
+
+</body>
+
+</html>
