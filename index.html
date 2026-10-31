@@ -252,6 +252,65 @@ document.getElementById("approval").textContent="Durum: Taslak kontrol edildi ve
 
 </script>
 
+  <script>
+
+async function bilgixAI() {
+
+  const country = document.getElementById("country").value;
+
+  const duration = document.getElementById("duration").value;
+
+  alert("BİLGİX yapay zekâya bağlanıyor...");
+
+  try {
+
+    const response = await fetch(
+
+      "https://bilgix-ai.8jpzs88b5n.workers.dev/",
+
+      {
+
+        method: "POST",
+
+        headers: {
+
+          "Content-Type": "application/json"
+
+        },
+
+        body: JSON.stringify({
+
+          country: country,
+
+          duration: duration
+
+        })
+
+      }
+
+    );
+
+    const data = await response.json();
+
+    if (!response.ok) {
+
+      throw new Error(data.error || "Sunucu hatası");
+
+    }
+
+    document.getElementById("script").value = data.script;
+
+    alert("BİLGİX içeriği hazır!");
+
+  } catch (error) {
+
+    alert("Hata: " + error.message);
+
+  }
+
+}
+
+</script>
 </body>
 
 </html>
